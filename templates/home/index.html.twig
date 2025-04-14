@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block stylesheets %}
+<style>
+    .carousel {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .carousel-inner {
+        border-radius: 8px;
+    }
+
+    .carousel-item {
+        transition: transform 1.2s ease-in-out;
+    }
+
+    .carousel-item img {
+        height: 400px;
+        object-fit: cover;
+    }
+
+    .carousel-caption {
+        background: rgba(0, 0, 0, 0.5);
+        padding: 20px;
+        border-radius: 8px;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+    }
+
+    .carousel-caption h5 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .carousel-indicators {
+        bottom: 20px;
+    }
+
+    .carousel-indicators button {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin: 0 5px;
+        background-color: rgba(255, 255, 255, 0.5);
+        border: 2px solid #fff;
+    }
+
+    .carousel-indicators button.active {
+        background-color: #fff;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 5%;
+        opacity: 0.8;
+    }
+
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+        opacity: 1;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card mb-4">
+            <div class="card-body text-center">
+                <h1 class="card-title mb-4">Welcome to Our Application</h1>
+
+                {% if app.user %}
+                    <div class="alert alert-success">
+                        <p class="mb-0">
+                            You are logged in as <strong>{{ app.user.userIdentifier }}</strong>
+                        </p>
+                    </div>
+                    <a href="{{ path('app_logout') }}" class="btn btn-danger">Logout</a>
+                {% else %}
+                    <p class="lead mb-4">
+                        Please login or register to access all features
+                    </p>
+                    <div class="d-grid gap-2 d-md-block">
+                        <a href="{{ path('app_register') }}" class="btn btn-primary me-2">Register</a>
+                        <a href="{{ path('app_login') }}" class="btn btn-success">Login</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Image Gallery Section -->
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Featured Images</h2>
+                
+                <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="2"></button>
+                    </div>
+                    
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{ asset('images/home/image1.jpg') }}" class="d-block w-100" alt="First slide">
+                            <div class="carousel-caption">
+                                <h5>First Image</h5>
+                                <p>Description for the first image</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('images/home/image2.jpg') }}" class="d-block w-100" alt="Second slide">
+                            <div class="carousel-caption">
+                                <h5>Second Image</h5>
+                                <p>Description for the second image</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('images/home/image3.jpg') }}" class="d-block w-100" alt="Third slide">
+                            <div class="carousel-caption">
+                                <h5>Third Image</h5>
+                                <p>Description for the third image</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
